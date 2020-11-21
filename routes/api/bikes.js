@@ -1,9 +1,7 @@
 const { Router } = require('express')
-// const { mongoUri } = require('../../config')
 const mongodb = require('mongodb')
-const BikeItem = require('../../models/BikeSchema')
-const multer = require('multer')
 const router = Router()
+
 require('dotenv').config()
 
 router.get('/', async (req, res) => {
