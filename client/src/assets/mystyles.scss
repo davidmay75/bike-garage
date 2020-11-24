@@ -1,0 +1,20 @@
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+
+$primary: rgba(194, 249, 112, 1);
+$secondary: rgba(111, 4, 256, 1);
+
+$input-background-color: rgba(144, 100, 0, 1.0);
+
+$navbar-background-color: rgba(0, 100, 0, 1.0);
+$navbar-height: 3.5rem;
+$navbar-padding-vertical: 1rem;
+$navbar-padding-horizontal: 2rem;
+
+$card-background-color: rgba(51, 0, 102, 0.4);
+$card-radius: 0.5rem;
+
+$modal-background-color: rgba(144, 100, 0, 1.0);
+$modal-background-background-color: rgba(0, 100, 0, 0.4);
+
+@import '~bulma';
