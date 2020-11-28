@@ -5,8 +5,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bikeRoutes = require('./routes/api/bikes'),
       imageRoutes = require('./routes/api/images')
+    //   const PORT = 4000
+
 const app = express()
-const PORT = 4000
+
 require('dotenv').config()
 
 app.use(cors())
@@ -30,5 +32,7 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
     })
 }
+
+const PORT = process.env.PORT || 4000
 
 app.listen(PORT, () => console.log('App listening on port: ' + PORT))
