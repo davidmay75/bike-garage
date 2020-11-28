@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="main">
 
   <NavbarVue @open-modal="showAddBikeModal"/>
 
@@ -10,7 +10,7 @@
 <div class="modal" :class="{'is-active': showAddBikeModalFlag}">
   <div class="modal-background" v-on:click="hideAddBikeModal"></div>
     <div class="modal-content has-background-grey py-5 px-5">
-        <h1 class="title is-1">Add Bike</h1>            
+        <h1 class="title is-1 has-text-primary">Add Bike</h1>            
      
         <BikeEntryVue @bike-uploaded="onBikeUpload"/>
 
@@ -59,4 +59,16 @@ export default {
 .garage {
   margin: 1rem;
 }
+.main{
+  /* background-color: aliceblue; */
+}
+.modal-content {
+  border: solid rgba(194, 249, 112, 1) 5px;
+  border-radius: .5rem;
+  height: fixed;
+}
+h1{
+  color: aliceblue;
+}
+
 </style>

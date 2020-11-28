@@ -2,8 +2,8 @@
 <div class="section">
 
   <div class="container">
-    <div class="columns is-vcentered">
-      <div class="column is-vcentered">
+    <div class="columns">
+      <div class="column">
         <div v-bind:key="bike._id" v-for="bike in bikes" v-bind:item="bike">
         <BikeVue v-bind:bike="bike"/>
       </div>
@@ -52,12 +52,12 @@ export default {
 
 <style>
 .section {
-  background-color: rgb(153, 130, 0);
+  /* background-color: rgba(0, 100, 0, 1); */
 }
 .container {
-  background-color: rgb(44, 44, 4);
+  /* background-color: rgb(255, 255, 0); */
 }
 .column {
-  text-align: center;
+  text-align: left;
 }
 </style>

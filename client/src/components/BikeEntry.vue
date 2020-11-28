@@ -1,36 +1,85 @@
 <template>
 <form id="form" @submit.prevent="onSubmit">
 
-  <div class="field">
+<div class="field is-horizontal">
+  <div class="field-label">
+    <label class="label">Company</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control ">
+        <input class="input" type="text" v-model="company" placeholder="Company">
+      </p>
+    </div>  
+  </div>
+</div>
+<div class="field is-horizontal">
+  <div class="field-label">
+    <label class="label">Model</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control ">
+        <input class="input" type="text"  v-model="model" placeholder="Model">
+      </p>
+    </div>  
+  </div>
+</div>
+<div class="field is-horizontal">
+  <div class="field-label">
+    <label class="label">Year</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control ">
+        <input class="input" type="text" v-model="year" placeholder="1969">
+      </p>
+    </div>  
+  </div>
+</div>
+<div class="field is-horizontal">
+  <div class="field-label">
+    <label class="label">Image</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control ">
+        <input class="input" type="file" ref="files" @change="onFileSelected">
+      </p>
+    </div>  
+  </div>
+</div>
+
+  <!-- <div class="field">
     <label class="label">Company</label>
     <div class="control">
       <input class="input" type="text"  v-model="company" placeholder="">
     </div>  
-  </div>  
+  </div>   -->
 
-  <div class="field">
-    <label class="label">Model</label>
+  <!-- <div class="field is-horizontal">
+    <label class="field-label">Model</label>
     <div class="control">
       <input class="input" type="text"  v-model="model" placeholder="">
     </div>  
-  </div>  
+  </div>   -->
 
-  <div class="field">
+  <!-- <div class="field">
     <label class="label">Year</label>
     <div class="control">
       <input class="input" type="text"  v-model="year" placeholder="">
     </div>  
-  </div>  
-
+  </div>   -->
+<!-- 
   <div class="field">
     <label class="label">Image</label>
     <div class="control">
       <input class="input" type="file" ref="files" @change="onFileSelected">
     </div>  
-  </div>  
+  </div>   -->
 
   <div class="control">
-    <button class="button is-primary" v-on:click="addBike">Submit</button>
+    <button class="button is-primary is-pulled-right" v-on:click="addBike">Submit</button>
   </div>
 
 </form>
@@ -118,13 +167,10 @@ export default {
 </script>
 
 <style>
-/* input{
-    background-color: #000;
-    color: green;
-      margin: 5px;
 
-}
 label {
   margin: 5px;
-} */
+} 
+
+
 </style>
