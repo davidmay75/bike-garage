@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const url = 'http://localhost:4000/api/bikes/'
+// const url = 'http://localhost:4000/api/bikes/' //HEROKU
+const url = 'http://bike-garage.herokuapp.com/api/bikes/'
+
 
 class BikeService {
     // Get bikes
