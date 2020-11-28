@@ -93,8 +93,9 @@ export default {
           const formData = new FormData()
           formData.append('image', this.uploadFiles[0]) 
 
-          try {          
-            const response = await axios.post('http://localhost:4000/api/images/', formData)
+          try {          //heroku
+            // const response = await axios.post('http://localhost:4000/api/images/', formData)
+            const response = await axios.post('http://bike-garage.herokuapp.com/api/images/', formData)
     
             await BikeService.insertBike(this.company, this.model, this.year, response.data.imageUrl)
 
