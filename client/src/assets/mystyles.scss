@@ -1,0 +1,41 @@
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+
+$primary:rgba(194, 249, 112, 1) ;
+$secondary: rgba(0, 100, 0, 1);
+$grey: #777777;
+
+$background: $white;
+$link: $blue;
+
+$input-focus-border-color:$primary;
+$input-focus-box-shadow-color: rgba($input-focus-border-color, 0.25);
+
+
+$family-primary: Noto Sans, sans-serif;
+
+$input-background-color: rgb(255, 255, 255);
+$label-color: $primary;
+$label-weight: $weight-normal;
+// $help-size: $size-small;
+
+$navbar-background-color:$grey;
+$navbar-height: 3.5rem;
+$navbar-padding-vertical: 1rem;
+$navbar-padding-horizontal: 2rem;
+
+
+$card-color: rgb(8, 0, 85);
+$card-background-color:  $grey;
+$card-radius: 0.5rem;
+
+$modal-content-width: 640px;
+$modal-content-margin-mobile: 20px;
+$modal-content-spacing-mobile: 160px;
+$modal-content-spacing-tablet: 40px;
+// $modal-background-color: rgba(134, 0, 0, 0.75);
+$modal-background-background-color: rgba($grey, 0.4);
+$transition-duration: 1.3s;
+$transition-duration-newsPaper: 1.7s;
+$transition-duration-3dslit: 1.5s;
+@import '~bulma';
