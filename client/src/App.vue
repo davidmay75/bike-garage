@@ -65,7 +65,7 @@ export default {
 .modal-content {
   border: solid rgba(194, 249, 112, 1) 5px;
   border-radius: .5rem;
-  height: fixed;
+  
 }
 h1{
   color: aliceblue;

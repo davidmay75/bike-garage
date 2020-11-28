@@ -50,34 +50,6 @@
   </div>
 </div>
 
-  <!-- <div class="field">
-    <label class="label">Company</label>
-    <div class="control">
-      <input class="input" type="text"  v-model="company" placeholder="">
-    </div>  
-  </div>   -->
-
-  <!-- <div class="field is-horizontal">
-    <label class="field-label">Model</label>
-    <div class="control">
-      <input class="input" type="text"  v-model="model" placeholder="">
-    </div>  
-  </div>   -->
-
-  <!-- <div class="field">
-    <label class="label">Year</label>
-    <div class="control">
-      <input class="input" type="text"  v-model="year" placeholder="">
-    </div>  
-  </div>   -->
-<!-- 
-  <div class="field">
-    <label class="label">Image</label>
-    <div class="control">
-      <input class="input" type="file" ref="files" @change="onFileSelected">
-    </div>  
-  </div>   -->
-
   <div class="control">
     <button class="button is-primary is-pulled-right" v-on:click="addBike">Submit</button>
   </div>
@@ -103,7 +75,7 @@ export default {
         model: "",
         year: "",
         imageLocation: "",
-        imageLocations: [],
+        // imageLocations: [],
         error: ""
     }   
   },
