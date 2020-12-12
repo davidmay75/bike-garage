@@ -12,7 +12,7 @@ const app = express()
 require('dotenv').config()
 
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -34,5 +34,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT || 4000
+console.log('Process port' + process.env.PORT)
 
 app.listen(PORT, () => console.log('App listening on port: ' + PORT))

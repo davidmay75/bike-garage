@@ -21,7 +21,8 @@ router.post('/', async (req, res) => {
         company: req.body.company,
         model: req.body.model,
         year: req.body.year,
-        imageLocation: req.body.imageLocation
+        imageLocation: req.body.imageLocation,
+        description: req.body.description
     })
     res.status(201).send()         
 })

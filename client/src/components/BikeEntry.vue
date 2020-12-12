@@ -49,6 +49,18 @@
     </div>  
   </div>
 </div>
+<div class="field is-horizontal">
+  <div class="field-label">
+    <label class="label">Description</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control ">
+        <textarea class="textarea" v-model="description" placeholder="Description"></textarea>
+      </p>
+    </div>  
+  </div>
+</div>
 
   <div class="control">
     <button class="button is-primary is-pulled-right" v-on:click="addBike">Submit</button>
@@ -65,7 +77,7 @@ require('dotenv').config()
 
 export default {
   name: 'BikeEntry',
-  emits: {'bike-uploaded': null},
+  emits: ['bike-uploaded'],
   data() {
     return {
         file: "",
@@ -74,6 +86,7 @@ export default {
         company: "",
         model: "",
         year: "",
+        description: "",
         imageLocation: "",
         // imageLocations: [],
         error: ""
@@ -81,10 +94,15 @@ export default {
   },
 
   methods: {
-    onSubmit() {
-      this.file = []
+    submitted() {
+      this.file = ""
       this.files = []
       this.uploadFiles = []
+      this.company = ""
+      this.model = ""
+      this.year = ""
+      this.description = ""
+      this.imageLocation = ""
     },
 
     async addBike() {
@@ -93,31 +111,44 @@ export default {
           const formData = new FormData()
           formData.append('image', this.uploadFiles[0]) 
 
-          try {          //heroku
+          try {         
             // const response = await axios.post('http://localhost:4000/api/images/', formData)
-            const response = await axios.post('http://bike-garage.herokuapp.com/api/images/', formData)
+            // const url = 'http://bike-garage.herokuapp.com/api/images/'
+            // const PORT = process.env.PORT || 4000
+            // console.log(PORT)
+
+            const url = '/api/images/'
+
+            const response = await axios.post(url, formData)
+            // if (!response.data.imageUrl){
+            //   image failed
+            // }
     
-            await BikeService.insertBike(this.company, this.model, this.year, response.data.imageUrl)
-
-            console.log(process.env)
-
-            this.imageLocation = response.data.imageUrl
-
-            this.onSubmit()
+            await BikeService.insertBike(this.company, this.model, this.year, response.data.imageUrl, this.description)
 
             this.$emit('bike-uploaded')
-
+            // this.submitted()
 
           } catch (error) {
             console.log(error)
+            this.error = error
           }         
       }
       else {
-        BikeService.insertBike(this.company, this.model, this.year, "")
-        this.$emit('bike-uploaded')
-        //do try
+
+         BikeService.insertBike(this.company, this.model, this.year, "", this.description)
+          this.$emit('bike-uploaded')
+          // this.submitted()
+        // try {
+        //   BikeService.insertBike(this.company, this.model, this.year, "", this.description)
+        //   this.$emit('bike-uploaded')
+        //   this.submitted()
+
+        // } catch (error) {
+        //   console.log(error)
+        //   this.error = error
+        // }
       }
-      //this.submitted()
     },
 
     onFileSelected() {
@@ -133,7 +164,6 @@ export default {
             type: file.type,
           }))]
 
-        this.imageLocation = this.uploadFiles[0].name
     }
   }
 }
