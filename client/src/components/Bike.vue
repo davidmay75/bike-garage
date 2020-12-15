@@ -14,12 +14,18 @@
       </div>
       <div class="column is-one-fifth">
             <span class="subtitle is-2 has-text-white">{{bike.year}}</span>
+            
       </div>
     </div>
 
     <div>
       <p class=" has-text-white">{{bike.description}}</p>    
     </div>
+
+    <div class="control">
+      <textarea class="textarea" v-model="description" placeholder='bike.description' readonly></textarea>
+    </div>
+
   </div>
 
 </div>
@@ -59,8 +65,8 @@ img {
     width:  100px;
     height: 100px;
     object-fit: cover;
-    border: solid black ;
-    border-width: 2px 2px 2px 2px ;
+    /* border: solid black ;
+    border-width: 2px 2px 2px 2px ; */
 }
 
 .image { 

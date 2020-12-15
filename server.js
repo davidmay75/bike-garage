@@ -5,7 +5,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bikeRoutes = require('./routes/api/bikes'),
       imageRoutes = require('./routes/api/images')
-    //   const PORT = 4000
+const PORT = process.env.PORT || 4000
 
 const app = express()
 
@@ -33,7 +33,8 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-const PORT = process.env.PORT || 4000
-console.log('Process port' + process.env.PORT)
-
 app.listen(PORT, () => console.log('App listening on port: ' + PORT))
+
+// On the server:
+//   * The Node.js application is served from /var/www/html
+//   * The Node.js passwords and keys are saved in /root/.digitalocean_passwords
