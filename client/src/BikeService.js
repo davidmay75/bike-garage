@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const url = 'http://localhost:4000/api/bikes/'
+const url = '/api/bikes/'
 
 class BikeService {
     // Get bikes
@@ -21,12 +20,13 @@ class BikeService {
     }
    
     //Create Post
-    static insertBike(company, model, year, imageLocation) {
+    static insertBike(company, model, year, imageLocation, description) {
         return axios.post(url, {
             company,
             model,
             year,
-            imageLocation
+            imageLocation,
+            description
         });
     }
 

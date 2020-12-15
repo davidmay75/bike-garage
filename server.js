@@ -1,15 +1,18 @@
 const cors = require('cors')
+const path = require('path')
 const bodyParser = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
 const bikeRoutes = require('./routes/api/bikes'),
       imageRoutes = require('./routes/api/images')
+const PORT = process.env.PORT || 4000
+
 const app = express()
-const PORT = 4000
+
 require('dotenv').config()
 
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -31,3 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(PORT, () => console.log('App listening on port: ' + PORT))
+
+// On the server:
+//   * The Node.js application is served from /var/www/html
+//   * The Node.js passwords and keys are saved in /root/.digitalocean_passwords

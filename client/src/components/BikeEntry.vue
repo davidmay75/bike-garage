@@ -49,34 +49,18 @@
     </div>  
   </div>
 </div>
-
-  <!-- <div class="field">
-    <label class="label">Company</label>
-    <div class="control">
-      <input class="input" type="text"  v-model="company" placeholder="">
+<div class="field is-horizontal">
+  <div class="field-label">
+    <label class="label">Description</label>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <p class="control ">
+        <textarea class="textarea" v-model="description" placeholder="Description"></textarea>
+      </p>
     </div>  
-  </div>   -->
-
-  <!-- <div class="field is-horizontal">
-    <label class="field-label">Model</label>
-    <div class="control">
-      <input class="input" type="text"  v-model="model" placeholder="">
-    </div>  
-  </div>   -->
-
-  <!-- <div class="field">
-    <label class="label">Year</label>
-    <div class="control">
-      <input class="input" type="text"  v-model="year" placeholder="">
-    </div>  
-  </div>   -->
-<!-- 
-  <div class="field">
-    <label class="label">Image</label>
-    <div class="control">
-      <input class="input" type="file" ref="files" @change="onFileSelected">
-    </div>  
-  </div>   -->
+  </div>
+</div>
 
   <div class="control">
     <button class="button is-primary is-pulled-right" v-on:click="addBike">Submit</button>
@@ -93,7 +77,7 @@ require('dotenv').config()
 
 export default {
   name: 'BikeEntry',
-  emits: {'bike-uploaded': null},
+  emits: ['bike-uploaded'],
   data() {
     return {
         file: "",
@@ -102,17 +86,23 @@ export default {
         company: "",
         model: "",
         year: "",
+        description: "",
         imageLocation: "",
-        imageLocations: [],
+        // imageLocations: [],
         error: ""
     }   
   },
 
   methods: {
-    onSubmit() {
-      this.file = []
+    submitted() {
+      this.file = ""
       this.files = []
       this.uploadFiles = []
+      this.company = ""
+      this.model = ""
+      this.year = ""
+      this.description = ""
+      this.imageLocation = ""
     },
 
     async addBike() {
@@ -121,30 +111,37 @@ export default {
           const formData = new FormData()
           formData.append('image', this.uploadFiles[0]) 
 
-          try {          
-            const response = await axios.post('http://localhost:4000/api/images/', formData)
-    
-            await BikeService.insertBike(this.company, this.model, this.year, response.data.imageUrl)
-
-            console.log(process.env)
-
-            this.imageLocation = response.data.imageUrl
-
-            this.onSubmit()
+          try {         
+            const url = '/api/images/'
+            const response = await axios.post(url, formData)
+            // if (!response.data.imageUrl){
+            //   image failed
+            // }
+            await BikeService.insertBike(this.company, this.model, this.year, response.data.imageUrl, this.description)
 
             this.$emit('bike-uploaded')
-
+            // this.submitted()
 
           } catch (error) {
             console.log(error)
+            this.error = error
           }         
       }
       else {
-        BikeService.insertBike(this.company, this.model, this.year, "")
-        this.$emit('bike-uploaded')
-        //do try
+
+         BikeService.insertBike(this.company, this.model, this.year, "", this.description)
+          this.$emit('bike-uploaded')
+          // this.submitted()
+        // try {
+        //   BikeService.insertBike(this.company, this.model, this.year, "", this.description)
+        //   this.$emit('bike-uploaded')
+        //   this.submitted()
+
+        // } catch (error) {
+        //   console.log(error)
+        //   this.error = error
+        // }
       }
-      //this.submitted()
     },
 
     onFileSelected() {
@@ -160,7 +157,6 @@ export default {
             type: file.type,
           }))]
 
-        this.imageLocation = this.uploadFiles[0].name
     }
   }
 }
