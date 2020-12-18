@@ -1,8 +1,8 @@
 <template>
 <div class="card">
-  <div class="card-image">
-    <figure class="image">
-      <img v-bind:src=bike.imageLocation alt="image uh-oh">
+  <div class="card-image" v-show="!!bike.imageLocation">
+    <figure class="image has-text-black">
+      <img v-bind:src=bike.imageLocation alt="image uh-oh :O">
     </figure>
   </div>
 
@@ -18,12 +18,8 @@
       </div>
     </div>
 
-    <div>
-      <p class=" has-text-white">{{bike.description}}</p>    
-    </div>
-
-    <div class="control">
-      <textarea class="textarea" v-model="description" placeholder='bike.description' readonly></textarea>
+    <div class="description" v-show="!!bike.description">
+      <p class="description-text">{{bike.description}}</p>    
     </div>
 
   </div>
@@ -46,12 +42,22 @@ export default {
 <style >
 .card {
   margin: 0.5rem;
-  border: solid rgba(194, 249, 112, 1) 0.25rem;
+  border: solid rgba(194, 249, 112, 1) 0.5rem;
   /* color: aquamarine; */
+}
+.description-text {
+  margin: 0.5rem;
 }
 
 .container {
     /* border: 4px solid rgb(255, 0, 0); */
+}
+.description {
+  white-space: pre-wrap;
+  background-color: rgba(255, 255, 255, 0.5) ;
+  color: rgb(0, 0, 0);
+  border: solid rgb(194, 249, 112) 0.25rem;
+  border-radius: 0.5rem;
 }
 
 
