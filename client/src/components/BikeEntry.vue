@@ -62,6 +62,13 @@
   </div>
 </div>
 
+  <p class="has-text-danger" v-if="errors.length">
+    <b>Please correct the following error(s):</b>
+    <ul>
+      <li v-for="error in errors" v-bind:key="error.id">{{ error }}</li>
+    </ul>
+  </p>
+
   <div class="control">
     <button class="button is-primary is-pulled-right" v-on:click="addBike">Submit</button>
   </div>
@@ -89,12 +96,12 @@ export default {
         description: "",
         imageLocation: "",
         // imageLocations: [],
-        error: ""
+        errors: []
     }   
   },
 
   methods: {
-    submitted() {
+    clearForm() {
       this.file = ""
       this.files = []
       this.uploadFiles = []
@@ -105,9 +112,29 @@ export default {
       this.imageLocation = ""
     },
 
-    async addBike() {
+    checkForm(e) {
+      if (this.company && this.model) {
+        this.errors = [];
+        return true;        
+      }
 
-      if (this.uploadFiles[0])  {
+      this.errors = [];
+
+      if (!this.company) {
+        this.errors.push('Company required.');
+      }
+      if (!this.model) {
+        this.errors.push('Model required.');
+      }
+
+      e.preventDefault();
+    },
+
+    async addBike(e) {
+
+      if (this.checkForm(e)) {
+        if (this.uploadFiles[0])  {
+
           const formData = new FormData()
           formData.append('image', this.uploadFiles[0]) 
 
@@ -115,39 +142,30 @@ export default {
             const url = '/api/images/'
             const response = await axios.post(url, formData)
             // if (!response.data.imageUrl){
-            //   image failed
+              // image failed
             // }
+
             await BikeService.insertBike(this.company, this.model, this.year, response.data.imageUrl, this.description)
 
+            this.clearForm()
             this.$emit('bike-uploaded')
-            // this.submitted()
 
           } catch (error) {
             console.log(error)
-            this.error = error
           }         
       }
       else {
 
-         BikeService.insertBike(this.company, this.model, this.year, "", this.description)
-          this.$emit('bike-uploaded')
-          // this.submitted()
-        // try {
-        //   BikeService.insertBike(this.company, this.model, this.year, "", this.description)
-        //   this.$emit('bike-uploaded')
-        //   this.submitted()
-
-        // } catch (error) {
-        //   console.log(error)
-        //   this.error = error
-        // }
+          await BikeService.insertBike(this.company, this.model, this.year, "", this.description)
+          this.clearForm()
+          this.$emit('bike-uploaded')               
+        }
       }
     },
 
     onFileSelected() {
         const files = this.$refs.files.files
         this.uploadFiles = [...this.files, ...files]//+=
-        console.log("Files" + files)
 
         this.files = [
           ...this.files,
