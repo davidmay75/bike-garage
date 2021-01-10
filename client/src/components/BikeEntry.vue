@@ -79,7 +79,7 @@
 <script>    
 import axios from "axios"
 import BikeService from '../BikeService'
-import _ from 'lodash'
+// import _ from 'lodash'
 require('dotenv').config()
 
 export default {
@@ -88,6 +88,7 @@ export default {
   data() {
     return {
         file: "",
+        uploadFile: "",
         files: [],
         uploadFiles: [],
         company: "",
@@ -95,7 +96,6 @@ export default {
         year: "",
         description: "",
         imageLocation: "",
-        // imageLocations: [],
         errors: []
     }   
   },
@@ -103,6 +103,7 @@ export default {
   methods: {
     clearForm() {
       this.file = ""
+      this.uploadFile = ""
       this.files = []
       this.uploadFiles = []
       this.company = ""
@@ -113,12 +114,11 @@ export default {
     },
 
     checkForm(e) {
-      if (this.company && this.model) {
-        this.errors = [];
-        return true;        
-      }
-
       this.errors = [];
+
+      if (this.file) {
+        this.validateFile(this.file)
+      }
 
       if (!this.company) {
         this.errors.push('Company required.');
@@ -127,16 +127,22 @@ export default {
         this.errors.push('Model required.');
       }
 
+      if (this.errors.length == 0) {
+        return true;        
+      } 
+
       e.preventDefault();
+
     },
 
     async addBike(e) {
 
       if (this.checkForm(e)) {
-        if (this.uploadFiles[0])  {
+        if (this.uploadFile)  {
 
           const formData = new FormData()
-          formData.append('image', this.uploadFiles[0]) 
+          formData.append('image', this.uploadFile) 
+          console.log("attempting to upload: " + this.uploadFile)
 
           try {         
             const url = '/api/images/'
@@ -158,24 +164,49 @@ export default {
 
           await BikeService.insertBike(this.company, this.model, this.year, "", this.description)
           this.clearForm()
-          this.$emit('bike-uploaded')               
+          this.$emit('bike-uploaded')      
+                   
         }
       }
     },
 
     onFileSelected() {
-        const files = this.$refs.files.files
-        this.uploadFiles = [...this.files, ...files]//+=
+      const file = this.$refs.files.files[0]
+      this.file = file
+      console.log("File selected: " + this.file)
 
-        this.files = [
-          ...this.files,
-          ..._.map(files, file=> ({
-            name: file.name,
-            size: file.size,
-            type: file.type,
-          }))]
+      if (this.validateFile(file)) {
+        this.uploadFile = file
+      }
 
-    }
+      // const files = this.$refs.files.files
+      // this.uploadFiles = [...this.files, ...files]//+=
+
+      // this.files = [
+      //   ...this.files,
+      //   ..._.map(files, file=> ({
+      //     name: file.name,
+      //     size: file.size,
+      //     type: file.type,
+      //   }))]
+
+    },
+    validateFile(file) {
+      var allowedExtensions = ["image/jpeg", "image/jpeg", "image/png", "image/gif"]
+
+      if (allowedExtensions.includes(file.type)) {
+        //this.uploadFile = file
+        return true
+      }
+
+      this.errors.push('Only JPG, JPEG, PNG extensions allowed')
+      //this.uploadFile = ""
+      return false
+    },
+
+    // onFileUpload() {
+
+    // }
   }
 }
 </script>

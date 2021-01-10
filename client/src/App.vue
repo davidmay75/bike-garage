@@ -26,19 +26,21 @@ import NavbarVue from './components/Navbar.vue'
 import GarageVue from './components/Garage.vue'
 import BikeEntryVue from './components/BikeEntry.vue'
 
-export default {
+ export default {
   name: 'App',
   components: {
     NavbarVue,
     BikeEntryVue,
     GarageVue   
   },
+  ///-----------------
   data() {
     return {
       bikes: [],
       showAddBikeModalFlag: false
     }
   },
+  //------------------------
   methods: {
     showAddBikeModal() {
       this.showAddBikeModalFlag = true
@@ -50,8 +52,10 @@ export default {
       this.hideAddBikeModal()
       this.$refs.garage.refreshGarage()
     }
-  }
+  },
+
 }
+
 </script>
 
 <style>

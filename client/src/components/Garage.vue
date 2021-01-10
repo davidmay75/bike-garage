@@ -36,6 +36,7 @@ export default {
         this.bikes = await BikeService.getBikes()
       } catch (error) {
         this.error = error.message
+        console.log(error.message)
       }
     }  
   },
