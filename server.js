@@ -4,7 +4,8 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
 const bikeRoutes = require('./routes/api/bikes'),
-      imageRoutes = require('./routes/api/images')
+      imageRoutes = require('./routes/api/images'),
+      userRoutes = ('./routes/api/users')
 const PORT = process.env.PORT || 4000
 
 const app = express()
@@ -25,6 +26,8 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use('/api/bikes', bikeRoutes)
 app.use('/api/images', imageRoutes)
+app.use('/api/users', userRoutes)
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/dist'))
