@@ -46,8 +46,10 @@ export default {
       console.log(this.username)
       if (this.username != '' && this.password != '' ) {
         try{
-          await UserService.insertUser(this.username, this.encryptPassword(this.password))
-          console.log("User" + this.username + " Added")
+          // const encryptedPassword = await this.encryptPassword(this.password)
+ //var d = new Date()
+          await UserService.insertUser(this.username, await this.encryptPassword(this.password), Date.now())
+          console.log("User" + this.username + " Added and " )
         }
         catch {
           this.error = 'Error adding user'

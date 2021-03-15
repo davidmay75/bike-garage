@@ -4,6 +4,7 @@ module.exports = {
             proxy: {
                 '/api': {
                     target: 'http://localhost:4000',
+                    secure: false
                     //target: 'http://[::1]:4000'
                 },
             },

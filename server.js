@@ -5,7 +5,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bikeRoutes = require('./routes/api/bikes'),
       imageRoutes = require('./routes/api/images'),
-      userRoutes = ('./routes/api/users')
+      userRoutes = require('./routes/api/users')
 const PORT = process.env.PORT || 4000
 
 const app = express()

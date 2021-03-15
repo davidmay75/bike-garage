@@ -19,8 +19,9 @@ router.post('/', async (req, res) => {
     const users = await loadUserCollection()
     
     await users.insertOne({
-        company: req.body.username,
-        model: req.body.password,
+        username: req.body.username,
+        password: req.body.password,
+        joinedDate: req.body.joinedDate
     })
     res.status(201).send()         
 })
