@@ -59,5 +59,6 @@ export default {
 }
 .column {
   text-align: left;
+  max-width: 75%;
 }
 </style>

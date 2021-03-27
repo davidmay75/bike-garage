@@ -20,12 +20,31 @@ class UserService {
     }
    
     //Add user
-    static insertUser(username, password, joinedDate) {
+    static insertUser(username, password) {
         return axios.post(url, {
             username,
-            password,
-            joinedDate
+            password     
         });
+    }
+
+    static login(username, password) {
+        return axios.post(url+"Login/", {
+            username,
+            password
+        })
+    }
+
+    static logout(refreshToken) {
+        //return refreshToken
+        return axios.post(url+"Logout/", {            
+                token: refreshToken            
+        })        
+    }
+
+    static postToken(token){
+        return axios.post(url+"Token/", {
+            token
+        })
     }
 
 }

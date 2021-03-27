@@ -156,7 +156,11 @@ export default {
       }
       else {
 
-          await BikeService.insertBike(this.company, this.model, this.year, "", this.description)
+          const response = await BikeService.insertBike(this.company, this.model, this.year, "", this.description)
+          console.log(response)
+          this.errors.push(response.data)
+          console.log(response.status)
+          
           this.clearForm()
           this.$emit('bike-uploaded')               
         }

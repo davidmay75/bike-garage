@@ -11,6 +11,6 @@ const UserSchema = new Schema({
     }
 })
 
-const UserItem = model('userItem', UserSchema)
+const User = model('userItem', UserSchema)
 
-module.exports = UserItem
+module.exports = User

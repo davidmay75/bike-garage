@@ -12,10 +12,9 @@
         <input type="text" v-model="password" placeholder="">        
       </div>
 
+      <button v-on:click="postUser()">Register</button>   
       {{error}}
-
-
-      <button v-on:click="postUser()">Register</button>    
+      {{message}} 
 
 </div>
 </template>
@@ -31,7 +30,8 @@ export default {
       error: '',
       username: '',
       password: '',
-      email: ''
+      email: '',
+      message: ''
     }
   },
 
@@ -46,10 +46,8 @@ export default {
       console.log(this.username)
       if (this.username != '' && this.password != '' ) {
         try{
-          // const encryptedPassword = await this.encryptPassword(this.password)
- //var d = new Date()
-          await UserService.insertUser(this.username, await this.encryptPassword(this.password), Date.now())
-          console.log("User" + this.username + " Added and " )
+          await UserService.insertUser(this.username, await this.encryptPassword(this.password))
+          this.message = "Thanks for joining " + this.username
         }
         catch {
           this.error = 'Error adding user'

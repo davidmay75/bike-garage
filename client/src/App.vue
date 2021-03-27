@@ -3,7 +3,8 @@
 
   <NavbarVue @open-modal="showAddBikeModal"/>
 
-  <register-vue/>
+  <RegisterVue/>
+  <LoginVue/>
 
   <div class="garage">
     <GarageVue ref="garage" />
@@ -28,6 +29,8 @@ import NavbarVue from './components/Navbar.vue'
 import GarageVue from './components/Garage.vue'
 import BikeEntryVue from './components/BikeEntry.vue'
 import RegisterVue from './components/Register.vue'
+import LoginVue from './components/Login.vue'
+
 
 export default {
   name: 'App',
@@ -35,7 +38,8 @@ export default {
     NavbarVue,
     BikeEntryVue,
     GarageVue,
-    RegisterVue
+    RegisterVue,
+    LoginVue
   },
   data() {
     return {

@@ -21,12 +21,20 @@ class BikeService {
    
     //Create Post
     static insertBike(company, model, year, imageLocation, description) {
-        return axios.post(url, {
+
+        // const config = {
+
+        // }
+
+        return axios.post(url, {            
             company,
             model,
             year,
             imageLocation,
             description
+        },
+        {
+           headers: {authorization: 'Bearer ' + localStorage.getItem('token')}
         });
     }
 
